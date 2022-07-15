@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <style>
+        div.row{
+            margin-bottom: 10%;
+        }
+        .link-secondary:hover{
+            color: rgb(255, 255, 255);
+        }
+        .alert{
+            text-align: center; 
+            width: 50%; 
+            margin: auto;
+            margin-top: 1%;
+
+        }
+            .vanta-canvass{
+             width: 100%;
+             height: 2000px;
+             padding :0 ;
+             margin :0; 
+  
+}
+
+    </style>
+    
+</head>
+
+<body class="vanta-canvass"> 
+
+
+
+{% if request.user.is_authenticated %}
+<div class="alert alert-primary" role="alert" >
+   <h5> Hello , {{user}} </h5>
+</div>
+{% endif %}
+
+<div class="container my-5 ">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-4 fw-bold lh-1 text-light"> Recently added quizzes</h1>
+        
+            <div> 
+                {% for q in quiz %}
+                    {% if forloop.revcounter0 in range %}
+                    <div>
+                        <h5>
+                                <a class="link-light" href=" {%url 'quiz' q.name %} " > {{q.name}} </a>
+                        </h5>
+                    </div>
+                    {% endif %} 
+               {%endfor%}
+            <a href=" {% url 'quizzes' %} " class="link-outline-secondary" >
+            <button type="button" class="btn btn-outline-secondary text-light btn-lg px-4">
+            browse all quizzes    
+            </button></a>
+        </div>
+    </div>
+
+
+
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-4 fw-bold lh-1 text-light"> Browse by categories</h1>
+        
+            <div> 
+                {% for c in category %}
+                    {% if forloop.revcounter0 in range %}
+                    <div>
+                        <h5>
+                                <a class="link-light" href=" {%url 'category' c.name %} " > {{c.name}} </a>
+                        </h5>
+                    </div>
+                    {% endif %} 
+               {%endfor%}
+            <a href=" {% url 'categories' %} " class="link-outline-secondary" >
+            <button type="button" class="btn btn-outline-secondary text-light btn-lg px-4">
+            All categories   
+            </button></a>
+        </div>
+</div>
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+
+<script>
+VANTA.WAVES({
+  el: ".vanta-canvass",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0x16304D,
+  shininess: 0.00,
+  waveHeight: 28.50,
+  waveSpeed: 0.85,
+  zoom: 1.75
+})
+</script>
+
+</body> 
+
+{% endblock %}
+
+

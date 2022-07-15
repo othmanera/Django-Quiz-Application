@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+
+{%load socialaccount%}
+{%providers_media_js%}
+
+
+{% block content %}
+<head>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .form-signin {
+        padding: 40%;
+        padding-top: 7%;
+      }
+      .form-floating {
+        margin: auto;
+      }
+      .vanta-canvass{
+             width: 100%;
+             height: 2000px;
+             padding :0 ;
+             margin :0; 
+  
+}
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+  </head>
+
+  <body class="vanta-canvass"> 
+
+{% if page == 'login' %}
+
+<!-- Login -->
+    
+  <main class="form-signin">
+    <!-- Error if the visitor plays 3 quizzes -->
+    {% if visits > 3 %}
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    Looks like you enjoyed playing ! log in to your account or create one to keep playing 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    {% endif %}
+    <!--  -->
+
+  
+
+
+      <form method="POST" action="">
+        <!-- logo -->
+        <img class="mb-5 mt-3" src="https://cdn.discordapp.com/attachments/756290553724928051/976138308562354216/QuizBox1.png" alt="" width="323.33" height="99" style="align-self: center;" >
+        <!--  -->
+      {% csrf_token %}
+        <h1 class="h5  mb-3 fw-normal text-light">Sign in to quizYbox</h1>
+    
+        <div class="form-floating">
+          <input type="text" name="username" class="form-control"  id="floatingInput" placeholder="@user">
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+    
+        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit" value="login">Sign in</button>
+        <div class="grid mt-4 ">
+
+
+     
+
+           <!-- Github -->
+            <a href="{% provider_login_url 'github' %}">
+          <div class="d-inline-block " style="margin-right: 10%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-github" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+          </div></a><!--  -->
+         <!-- facebook -->
+         <a href="{% provider_login_url "facebook" metho="js-sdk" %}">
+          <div class="d-inline-block" style="margin-right: 10%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-facebook" viewBox="0 0 16 16">
+              <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+            </svg>
+          </div> </a> <!--  -->
+          <!-- google -->
+          <a href="{% provider_login_url 'google' metho="oauth2" %}?next=/">
+          <div class="d-inline-block" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-google" viewBox="0 0 16 16">
+              <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+            </svg>
+            </svg>
+          </div></a><!--  -->
+
+        </div>
+
+
+        <p class="mt-4  text-muted">haven't signed up yet ?</p>
+        <a href="{% url 'register' %}">Join us</a>
+      </form>
+    </main>
+</div>    
+    
+
+
+
+{% else %}
+
+
+<!-- Registration -->
+<form method="POST" action="">
+  {% csrf_token %}
+    
+  {% for field in form %}
+    
+    <div style="margin-right: 30%; margin-left: 30%; margin-top: 1%;">
+      <p class="mt-2 mb-1 text-light">{{field.label_tag}}</p> 
+        {{field}}
+
+
+      
+       {% if field.help_text %}
+        <small style="color: #b2acac;"> {{field.help_text}} </small>
+      {% endif %}
+    </div>
+  {% endfor %}
+  
+    <button class="w-70 btn btn-lg btn-primary mt-2" type="submit" value="login">Sign up</button>
+    <p class="mt-3 mb-1 text-muted ">Already a member?</p>
+    <a href="{% url 'login' %}">Log in</a> 
+</form>
+
+    
+{% endif %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+
+<script>
+VANTA.WAVES({
+  el: ".vanta-canvass",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0x16304D,
+  shininess: 0.00,
+  waveHeight: 28.50,
+  waveSpeed: 0.85,
+  zoom: 1.75
+})
+</script>
+
+{% endblock %}

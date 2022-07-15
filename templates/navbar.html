@@ -1,0 +1,181 @@
+<head>
+  <style>
+
+    a{
+      text-decoration: none;
+    }
+    nav {
+    z-index: 2;
+    position: relative;
+    
+}
+ 
+
+      
+/* 
+      #navbarDropdownMenuLink:hover {
+    display: block;
+    opacity: 1;
+
+}
+
+#navbarDropdownMenuLink {
+display: block;
+opacity: 0;
+-webkit-transition: all 200ms ease-in;
+-moz-transition: all 200ms ease-in;
+-ms-transition: all 200ms ease-in;
+-o-transition: all 200ms ease-in;
+transition: all 200ms ease-in;
+display: none;
+} */
+
+
+  </style>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light" >
+    <div class="container" >
+      
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'index' %}"> <svg width="28" height="32" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a"><stop stop-color="#00BFFB" offset="0%"/><stop stop-color="#0270D7" offset="100%"/></linearGradient><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="b"><stop stop-color="#1F232A" stop-opacity=".48" offset="0%"/><stop stop-color="#1F2329" stop-opacity="0" offset="100%"/></linearGradient><linearGradient x1="87.665%" y1="103.739%" x2="-3.169%" y2="38.807%" id="c"><stop stop-color="#FFF" stop-opacity="0" offset="0%"/><stop stop-color="#FFF" stop-opacity=".64" offset="100%"/></linearGradient><linearGradient x1="-14.104%" y1="111.262%" x2="109.871%" y2="26.355%" id="d"><stop stop-color="#0270D7" offset="0%"/><stop stop-color="#0270D7" stop-opacity="0" offset="100%"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><path fill="url(#a)" transform="rotate(90 14 16)" d="M6 2l-8 13.999L6 30h16l8-14.001L22 2z"/><path fill="url(#b)" d="M14 0v32L0 24V8z"/><path fill="url(#c)" d="M28 24L0 8l14.001-8L28 8z"/><path fill-opacity=".48" fill="url(#d)" style="mix-blend-mode:multiply" d="M28 8L0 23.978V8l14.001-8L28 8z"/></g></svg></a>
+      
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="{% url 'index' %}" >QuizYbox</a>
+          </li>
+        </ul>  
+
+
+        {%else%}
+        <a href="{% url 'landing' %}"> <svg width="28" height="32" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a"><stop stop-color="#00BFFB" offset="0%"/><stop stop-color="#0270D7" offset="100%"/></linearGradient><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="b"><stop stop-color="#1F232A" stop-opacity=".48" offset="0%"/><stop stop-color="#1F2329" stop-opacity="0" offset="100%"/></linearGradient><linearGradient x1="87.665%" y1="103.739%" x2="-3.169%" y2="38.807%" id="c"><stop stop-color="#FFF" stop-opacity="0" offset="0%"/><stop stop-color="#FFF" stop-opacity=".64" offset="100%"/></linearGradient><linearGradient x1="-14.104%" y1="111.262%" x2="109.871%" y2="26.355%" id="d"><stop stop-color="#0270D7" offset="0%"/><stop stop-color="#0270D7" stop-opacity="0" offset="100%"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><path fill="url(#a)" transform="rotate(90 14 16)" d="M6 2l-8 13.999L6 30h16l8-14.001L22 2z"/><path fill="url(#b)" d="M14 0v32L0 24V8z"/><path fill="url(#c)" d="M28 24L0 8l14.001-8L28 8z"/><path fill-opacity=".48" fill="url(#d)" style="mix-blend-mode:multiply" d="M28 8L0 23.978V8l14.001-8L28 8z"/></g></svg></a>
+      
+      
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+            <li class="nav-item">
+              <a class="nav-link active text-light" aria-current="page" href="{% url 'landing' %}" >QuizYbox</a>
+            </li>
+          </ul>
+        {%endif%}
+
+
+
+
+
+        {% if request.user.is_authenticated %}
+          {% if request.user.is_staff %}
+          <button type="button" class="btn btn-success " style="margin: auto;">
+            <a href="/admin" class="link-primary " style="color:white" >Admin panel</a>
+          </button>
+          {% endif %}
+
+          <!-- Search bar  -->
+          <form class="d-flex"  method="GET" action="{% url 'search' %}?q={{c.name}}">
+            <input class="form-control me-2" type="search" name="q" placeholder="Search for categories or quizzes" size="80%"  aria-label="Search">
+          </form> 
+          <!--  -->
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: auto;">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href=" {% url 'quizzes' %} ">All quizzes</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-light" style="color:0xffff"; href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for c in category %}
+
+              <div>          
+                <a class="link-dark" href="{% url 'category' c.name %}" > {{c.name}} </a>
+              </div>
+
+          {%endfor%}
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="link-dark" href="/categories/"> All categories</a> </li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li> -->
+        </ul>
+
+
+        <div class="dropdown text-end success" width="auto"  style="margin-left: 2%;">
+          <a href="#" 
+            class="d-block link-light text-decoration-none dropdown-toggle" 
+            id="dropdownUser1" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+          </a>
+
+      
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" >
+
+            <!-- Profile link -->
+            <li><a class="dropdown-item" href="{% url 'profile' user.username %}">
+              <!-- Profile icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge" viewBox="0 0 16 16">
+                <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
+              </svg> 
+              <!--  -->
+              Profile</a></li>
+            
+            <li><a class="dropdown-item" href="{% url 'saved' user.username %}">
+              <!-- Saved icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z"/>
+                <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z"/>
+              </svg>
+              <!--  -->
+              Saved</a></li>
+            <li><hr class="dropdown-divider"></li>
+
+            <!-- logging out button -->
+            <li><a class="dropdown-item" href="{% url 'logout' %}" class="link-dark" >
+            <!-- logout icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
+              <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+              <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+            </svg>
+            <!--  -->
+             Sign out</a></li>
+          </ul>
+        </div>
+
+        {% else %}
+        <div class="text-end">
+          
+          <!-- log in button -->
+          <button type="button" class="btn btn-outline-primary me-2" >
+            <a href="{% url 'login' %}" class="link-dark text-light"  >Sign-in</a>
+          </button>
+
+          <!-- registration button  -->
+          <button type="button"  class="btn btn-primary">
+           <a href="{% url 'register' %}" class="link-primary text-light" > Sign-up</a>
+          </button>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </nav>
+

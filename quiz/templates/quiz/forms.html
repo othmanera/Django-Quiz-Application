@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form>
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="Email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <!--  -->
+    <!-- Age -->
+    <div class="mb-3">
+      <label for="Age" class="form-label">Age</label>
+      <input type="number" class="form-control" id="AgeInput">
+    </div>
+    <!--  -->
+    <div class="mb-3">
+      <label for="Age" class="form-label">birth date</label>
+      <input type="date" class="form-control" id="birthdateInput">
+    </div>
+
+    <!--  -->
+    <div class="container" style="display:grid;">
+        <label for="container"> Interests: </label>
+        <div class="checkbox">
+            <input type="radio" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">programming</label>
+        </div>
+
+        <div class="checkbox" >
+            <input type="radio" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Sports</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="radio" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Games</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="radio" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">programming</label>
+        </div>
+    </div>
+    
+
+    <a href="{% url 'index' %}"></a><button type="submit" class="btn btn-primary">complete</button> </a>
+    
+    
+  </form>
+    <a href="{% url 'index' %}"><button class="btn btn-primary"> Skip </button></a>
+
+
+
+{% endblock %}

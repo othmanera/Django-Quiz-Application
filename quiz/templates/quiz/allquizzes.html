@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  
+<style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+.cardContainer {
+  display: flex;
+  width: 1040px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  display: inline;
+  
+}
+.card {
+  display: inline-block;
+  margin: 10px;
+  margin-left: 3%;
+  background-color: transparent;
+  border-radius: 30px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 300px;
+  
+ 
+  
+}
+.card-header img {
+  width: 100%;
+  height: 150px;
+  border-radius : 30px;
+  object-fit:cover;
+}
+.card-body {
+  display : flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 10px;
+  
+}
+
+.tag {
+  background: #cccccc;
+  border-radius: 50px;
+  font-size: 12px;
+  margin: 0;
+  color: #fff;
+  padding: 2px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 1%;
+  
+}
+
+.tag-category{
+  background-color: #2355a8;
+}
+.level{
+  background-color: #5273a8;
+}
+
+
+.card-body p {
+  font-size: 12px;
+  margin: 0 0 40px;
+}
+#save{
+  border-radius: 30%;
+ 
+}
+
+.vanta-canvass{
+  width: 100%;
+  height: 100%;
+  padding :0 ;
+  margin :0; 
+  
+}
+   
+       </style>
+
+</head>
+    
+<body class="vanta-canvass">
+
+
+  <h1 class="text-light" style=" text-align: center;"> All quizzes</h1>
+
+          
+              
+   {% for q in quiz %}
+           
+    
+<div class="cardContainer">
+    <div class="card">
+      <a href="{% url 'quiz' q.name %}" class="link-dark">  
+      <div class="card-header">
+        
+        <img src=" {{q.images}} " alt="image" />
+      </div>
+      </a>
+      <div class="card-body">
+        <div class="tag tag-category">
+        <a class="link-light" href="{% url 'category' q.category %}">  {{q.category}}  </a>
+        </div>
+
+        <div class="tag level">
+          <small class="link-light">
+              {{q.level}}  
+            </small>
+          </div>
+        
+        
+       
+          <h4>
+            <a href="{% url 'quiz' q.name %}" id="quiz-name" class="link-dark">   
+              {{ q.name }}
+            </a>
+          </h4>
+
+          <p class="text-dark">
+            {{q.description}} 
+          </p>
+        </a>
+         <!-- save button -->
+         <form method="POST" action=" {% url 'saveAPI' q.id %} ">
+          {% csrf_token %}
+          <div class="save-button">
+            <button type="submit" class="btn btn-primary" id="save">
+            <small>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+              </svg>
+            </small>
+          </button>
+        </form>
+       </div>
+        
+       
+      </div>
+        </div>
+      </div>
+    </div>
+
+       
+                {%endfor%}
+
+       
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+        
+       <script>
+       VANTA.FOG({
+         el: ".vanta-canvass",
+         mouseControls: true,
+         touchControls: true,
+         gyroControls: false,
+         minHeight: 200.00,
+         minWidth: 200.00,
+         highlightColor: 0x4dc0f0,
+         midtoneColor: 0x0,
+         lowlightColor: 0x2b2c34,
+         baseColor: 0xfffffe,
+         blurFactor: 0.65,
+         speed: 2.00
+       })
+
+
+       </script>
+ 
+ 
+    
+
+
+ </body>
+
+
+
+{% endblock %}
